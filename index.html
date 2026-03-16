@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OPA Greek Street — Shkodër</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #F5EFE0; --warm-white: #FBF8F2; --olive: #4A5C2F;
+      --terracotta: #C15B3A; --terracotta-dark: #9B3E22;
+      --gold: #D4A843; --gold-light: #EAC76B;
+      --charcoal: #1E1E1E; --dark-brown: #2C1A0E; --mid-gray: #6B6458;
+    }
+    html { scroll-behavior: smooth; }
+    body { background-color: var(--warm-white); color: var(--charcoal); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+    /* LANG TOGGLE */
+    .lang-toggle { display: flex; align-items: center; background: var(--cream); border-radius: 20px; padding: 3px; gap: 2px; border: 1.5px solid rgba(193,91,58,0.2); }
+    .lang-btn { font-family: 'Syne', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.3rem 0.75rem; border-radius: 16px; border: none; background: transparent; color: var(--mid-gray); cursor: pointer; transition: all 0.2s; }
+    .lang-btn.active { background: var(--terracotta); color: #fff; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; background: rgba(251,248,242,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(193,91,58,0.12); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; color: var(--terracotta); letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--olive); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--terracotta); }
+    .nav-cta { background: var(--terracotta) !important; color: #fff !important; padding: 0.5rem 1.3rem; border-radius: 2px; }
+    .nav-cta:hover { background: var(--terracotta-dark) !important; }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 10rem 4rem 6rem 5rem; }
+    .hero-tag { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 1.6rem; display: flex; align-items: center; gap: 0.8rem; }
+    .hero-tag::before { content: ''; display: block; width: 2.4rem; height: 2px; background: var(--terracotta); }
+    h1 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(3.2rem, 6vw, 5.5rem); line-height: 0.95; color: var(--dark-brown); margin-bottom: 1.8rem; letter-spacing: -0.03em; }
+    h1 em { font-style: italic; color: var(--terracotta); }
+    .hero-sub { font-size: 1.05rem; line-height: 1.7; color: var(--mid-gray); max-width: 380px; margin-bottom: 2.8rem; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--terracotta); color: #fff; font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 1rem 2rem; border-radius: 2px; transition: background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-1px); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--charcoal); font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 1rem 2rem; border-radius: 2px; border: 1.5px solid var(--charcoal); transition: border-color 0.2s, color 0.2s; }
+    .btn-secondary:hover { border-color: var(--olive); color: var(--olive); }
+    .hero-right { position: relative; overflow: hidden; }
+    .hero-right::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--olive) 0%, var(--terracotta-dark) 60%, var(--dark-brown) 100%); }
+    .hero-pattern { position: absolute; inset: 0; z-index: 1; opacity: 0.08; background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%), repeating-linear-gradient(-45deg, #fff 0, #fff 1px, transparent 0, transparent 50%); background-size: 24px 24px; }
+    .hero-emblem { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+    .opa-big { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(5rem, 12vw, 11rem); color: rgba(255,255,255,0.12); line-height: 1; letter-spacing: -0.05em; user-select: none; }
+    .greek-icon { font-size: 5rem; line-height: 1; }
+    .hero-label { font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .hero-badge { position: absolute; bottom: 3rem; right: 3rem; z-index: 3; background: var(--gold); color: var(--dark-brown); width: 110px; height: 110px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; line-height: 1.4; animation: slowSpin 20s linear infinite; }
+    @keyframes slowSpin { to { transform: rotate(360deg); } }
+
+    /* MARQUEE */
+    .marquee-wrap { background: var(--terracotta); color: #fff; padding: 0.9rem 0; overflow: hidden; white-space: nowrap; }
+    .marquee-inner { display: inline-block; animation: marquee 22s linear infinite; }
+    .marquee-inner span { font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; padding: 0 2.5rem; }
+    .marquee-inner span.dot { color: var(--gold-light); padding: 0; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* SHARED */
+    section { padding: 7rem 0; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 3rem; }
+    .section-label { font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.7rem; }
+    .section-label::before { content: ''; display: block; width: 1.8rem; height: 2px; background: var(--terracotta); }
+    h2 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(2rem, 4vw, 3.4rem); color: var(--dark-brown); line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1.4rem; }
+    h2 em { font-style: italic; color: var(--terracotta); }
+
+    /* ABOUT */
+    #about { background: var(--cream); position: relative; overflow: hidden; }
+    #about::before { content: 'OPA'; position: absolute; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 22rem; color: rgba(193,91,58,0.04); top: -4rem; right: -4rem; line-height: 1; pointer-events: none; user-select: none; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .about-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .about-card { background: var(--dark-brown); border-radius: 4px; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; padding: 1.5rem; position: relative; overflow: hidden; }
+    .about-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+    .about-card.accent { background: var(--terracotta); }
+    .about-card.accent2 { background: var(--olive); }
+    .about-card .icon { font-size: 2.2rem; }
+    .about-card .label { font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.6); text-align: center; }
+    .about-card .val { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.6rem; color: #fff; text-align: center; }
+    .about-text p { font-size: 1.02rem; line-height: 1.8; color: var(--mid-gray); margin-bottom: 1.2rem; }
+
+    /* MENU */
+    #menu { background: var(--warm-white); }
+    .menu-intro { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+    .menu-intro p { max-width: 380px; color: var(--mid-gray); line-height: 1.7; }
+    .menu-categories { display: flex; gap: 0.6rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .cat-btn { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.55rem 1.2rem; border-radius: 2px; border: 1.5px solid rgba(193,91,58,0.2); background: transparent; color: var(--mid-gray); cursor: pointer; transition: all 0.2s; }
+    .cat-btn.active, .cat-btn:hover { background: var(--terracotta); color: #fff; border-color: var(--terracotta); }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .menu-item { background: var(--cream); border-radius: 4px; padding: 1.8rem; position: relative; overflow: hidden; transition: transform 0.2s; display: none; }
+    .menu-item.visible { display: block; }
+    .menu-item:hover { transform: translateY(-3px); }
+    .menu-item::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--terracotta); }
+    .item-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .item-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; color: var(--dark-brown); margin-bottom: 0.5rem; }
+    .item-desc { font-size: 0.85rem; color: var(--mid-gray); line-height: 1.6; margin-bottom: 1.2rem; }
+    .item-footer { display: flex; justify-content: space-between; align-items: center; }
+    .item-price { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: var(--terracotta); }
+    .item-tag { font-family: 'Syne', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--dark-brown); color: var(--gold-light); padding: 0.25rem 0.6rem; border-radius: 2px; }
+
+    /* WHY */
+    #why { background: var(--dark-brown); position: relative; overflow: hidden; }
+    #why::before { content: ''; position: absolute; top: -50%; left: -20%; width: 60%; height: 200%; background: radial-gradient(ellipse, rgba(193,91,58,0.15) 0%, transparent 70%); pointer-events: none; }
+    #why .section-label { color: var(--gold-light); }
+    #why .section-label::before { background: var(--gold-light); }
+    #why h2 { color: var(--cream); }
+    .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 4rem; }
+    .pillar { padding: 2.4rem 1.8rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; position: relative; transition: border-color 0.2s; }
+    .pillar:hover { border-color: var(--terracotta); }
+    .pillar::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.35s; }
+    .pillar:hover::after { width: 100%; }
+    .pillar-num { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 3.5rem; color: rgba(255,255,255,0.06); line-height: 1; margin-bottom: 1.5rem; }
+    .pillar-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .pillar-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; margin-bottom: 0.8rem; }
+    .pillar p { font-size: 0.88rem; color: rgba(255,255,255,0.48); line-height: 1.7; }
+
+    /* ORDER BANNER */
+    #order { background: var(--terracotta); padding: 5.5rem 0; position: relative; overflow: hidden; }
+    #order::before { content: '!'; position: absolute; right: 5%; top: -1rem; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 22rem; color: rgba(255,255,255,0.07); line-height: 1; user-select: none; }
+    #order .container { display: flex; align-items: center; justify-content: space-between; gap: 3rem; }
+    #order h2 { color: #fff; margin-bottom: 0.8rem; }
+    #order h2 em { color: var(--gold-light); }
+    #order p { color: rgba(255,255,255,0.7); font-size: 1rem; line-height: 1.6; }
+    .order-buttons { display: flex; flex-direction: column; gap: 0.8rem; min-width: 220px; }
+    .order-btn { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: rgba(255,255,255,0.12); color: #fff; border: 1px solid rgba(255,255,255,0.25); text-decoration: none; padding: 1rem 1.5rem; border-radius: 3px; font-family: 'Syne', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s; }
+    .order-btn:hover { background: rgba(255,255,255,0.22); }
+
+    /* CONTACT */
+    #contact { background: var(--cream); }
+    .contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+    .info-row { display: flex; gap: 1.2rem; align-items: flex-start; }
+    .info-icon { width: 44px; height: 44px; background: var(--dark-brown); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; border-radius: 2px; flex-shrink: 0; }
+    .info-label { font-family: 'Syne', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid-gray); margin-bottom: 0.3rem; }
+    .info-val { font-size: 0.95rem; color: var(--dark-brown); line-height: 1.5; }
+    .info-val a { color: inherit; text-decoration: none; }
+    .contact-social h3 { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid-gray); margin-bottom: 1.2rem; }
+    .social-links { display: flex; flex-direction: column; gap: 0.6rem; }
+    .social-link { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.4rem; background: var(--warm-white); border-radius: 3px; text-decoration: none; color: var(--charcoal); font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; border: 1.5px solid transparent; transition: border-color 0.2s, color 0.2s; }
+    .social-link:hover { border-color: var(--terracotta); color: var(--terracotta); }
+    .map-embed { margin-top: 0.5rem; border-radius: 4px; overflow: hidden; border: 1.5px solid rgba(193,91,58,0.2); }
+
+    /* FOOTER */
+    footer { background: var(--charcoal); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.2rem; color: var(--cream); }
+    .footer-logo span { color: var(--terracotta); }
+    .footer-text { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+
+    /* ANIM */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-left > * { opacity: 0; animation: fadeUp 0.7s forwards; }
+    .hero-left .hero-tag     { animation-delay: 0.15s; }
+    .hero-left h1            { animation-delay: 0.3s; }
+    .hero-left .hero-sub     { animation-delay: 0.45s; }
+    .hero-left .hero-actions { animation-delay: 0.6s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { height: 280px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .menu-grid { grid-template-columns: 1fr 1fr; }
+      .pillars { grid-template-columns: 1fr 1fr; }
+      nav { padding: 1.2rem 1.5rem; }
+      .hero-left { padding: 8rem 2rem 4rem; }
+      .menu-intro { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      #order .container { flex-direction: column; }
+    }
+    @media (max-width: 600px) {
+      .menu-grid { grid-template-columns: 1fr; }
+      .pillars { grid-template-columns: 1fr; }
+      .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+    }
+  </style>
+  <link rel="icon" type="image/png" href="opa-logo.png" />
+</head>
+<body>
+
+<nav>
+  <a href="#hero"><img src="opa-logo.png" alt="OPA Greek Street" style="height:80px;width:auto;display:block;" /></a>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav.about">About</a></li>
+    <li><a href="#menu" data-i18n="nav.menu">Menu</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    <li>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('sq')">SQ</button>
+      </div>
+    </li>
+    <li><a href="https://opagreekstreet.tryordering.com/store/opa_greek_street___shkoder" target="_blank" class="nav-cta" data-i18n="nav.order">Order Now</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag" data-i18n="hero.tag">Greek Street Food · Shkodër, Albania</div>
+    <h1 data-i18n-html="hero.h1">Taste<br><em>Greece.</em><br>Right Here.</h1>
+    <p class="hero-sub" data-i18n="hero.sub">Authentic Greek street food — gyros, souvlaki, fresh pitas — made from recipes that go back generations. Fast, bold, and unapologetically Greek.</p>
+    <div class="hero-actions">
+      <a href="https://opagreekstreet.tryordering.com/store/opa_greek_street___shkoder" target="_blank" class="btn-primary" data-i18n="hero.cta1">Order Online →</a>
+      <a href="#menu" class="btn-secondary" data-i18n="hero.cta2">View Menu</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-pattern"></div>
+    <div class="hero-emblem">
+      <div class="opa-big">OPA Shkodër</div>
+      <div class="greek-icon">🫒</div>
+      <div class="hero-label" data-i18n="hero.label">Greek Street Food</div>
+    </div>
+    <div class="hero-badge" data-i18n-html="hero.badge">Open<br>Now<br>🔥<br>Shkodër</div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span>Gyros</span><span class="dot">✦</span><span>Souvlaki</span><span class="dot">✦</span><span>Pita e Freskët</span><span class="dot">✦</span><span>Tzatziki</span><span class="dot">✦</span><span>Patate Greke</span><span class="dot">✦</span><span>Spanakopita</span><span class="dot">✦</span><span>Baklava</span><span class="dot">✦</span><span>Sallatë Greke</span><span class="dot">✦</span><span>Hummus</span><span class="dot">✦</span><span>OPA!</span><span class="dot">✦</span>
+    <span>Gyros</span><span class="dot">✦</span><span>Souvlaki</span><span class="dot">✦</span><span>Pita e Freskët</span><span class="dot">✦</span><span>Tzatziki</span><span class="dot">✦</span><span>Patate Greke</span><span class="dot">✦</span><span>Spanakopita</span><span class="dot">✦</span><span>Baklava</span><span class="dot">✦</span><span>Sallatë Greke</span><span class="dot">✦</span><span>Hummus</span><span class="dot">✦</span><span>OPA!</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-card"><span class="icon">🫙</span><div class="val">100%</div><div class="label" data-i18n="about.card1">Fresh Daily</div></div>
+        <div class="about-card accent"><span class="icon">🔥</span><div class="val" data-i18n="about.card2v">Hot</div><div class="label" data-i18n="about.card2l">Always</div></div>
+        <div class="about-card accent2"><span class="icon">🫶</span><div class="val" data-i18n="about.card3v">Made</div><div class="label" data-i18n="about.card3l">With Love</div></div>
+        <div class="about-card"><span class="icon">⚡</span><div class="val" data-i18n="about.card4v">Fast</div><div class="label" data-i18n="about.card4l">Delivery</div></div>
+      </div>
+      <div class="about-text">
+        <div class="section-label" data-i18n="about.label">Our Story</div>
+        <h2 data-i18n-html="about.h2">Where the Streets <em>of Greece</em> Meet Shkodër</h2>
+        <p data-i18n="about.p1">OPA Greek Street was born from a love of Greek culture and street food — the kind you find at a busy corner in Athens or Thessaloniki, wrapped in warm pita and bursting with flavour.</p>
+        <p data-i18n="about.p2">Every gyro is slow-roasted, every tzatziki whipped fresh, and every pita baked to order. We bring the spirit of the Greek street corner straight to Shkodër.</p>
+        <p data-i18n="about.p3">We believe fast food can be real food — so we never cut corners on ingredients, only on waiting time.</p>
+        <a href="#menu" class="btn-primary" style="margin-top:0.8rem;display:inline-flex;" data-i18n="about.cta">Explore the Menu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="container">
+    <div class="menu-intro">
+      <div>
+        <div class="section-label" data-i18n="menu.label">What We Serve</div>
+        <h2 data-i18n-html="menu.h2">Our <em>Menu</em></h2>
+      </div>
+      <p data-i18n="menu.sub">Everything made fresh. Order online for pickup or delivery in Shkodër.</p>
+    </div>
+    <div class="menu-categories">
+      <button class="cat-btn active" data-cat="all" data-i18n="menu.catAll">All</button>
+      <button class="cat-btn" data-cat="topsellers" data-i18n="menu.catTop">⭐ Top Sellers</button>
+      <button class="cat-btn" data-cat="pitas" data-i18n="menu.catPitas">Pitas &amp; Burgers</button>
+      <button class="cat-btn" data-cat="wraps" data-i18n="menu.catWraps">Wraps</button>
+      <button class="cat-btn" data-cat="bowls" data-i18n="menu.catBowls">Spartan Bowls</button>
+      <button class="cat-btn" data-cat="combos" data-i18n="menu.catCombos">Combos</button>
+      <button class="cat-btn" data-cat="salads" data-i18n="menu.catSalads">Salads</button>
+      <button class="cat-btn" data-cat="sides" data-i18n="menu.catSides">Sides &amp; Fries</button>
+      <button class="cat-btn" data-cat="kids" data-i18n="menu.catKids">Kids</button>
+      <button class="cat-btn" data-cat="drinks" data-i18n="menu.catDrinks">Drinks</button>
+      <button class="cat-btn" data-cat="sweets" data-i18n="menu.catSweets">Sweets</button>
+    </div>
+    <div class="menu-grid">
+
+      <!-- TOP SELLERS -->
+      <div class="menu-item visible" data-cat="topsellers"><span class="item-emoji">🌯</span><div class="item-name">Chicken Gyros Big</div><div class="item-desc">Large pita, chicken gyros, OPA mayo, fries, iceberg, paprika, tomato.</div><div class="item-footer"><div class="item-price">420 L</div><div class="item-tag">⭐ Top</div></div></div>
+      <div class="menu-item visible" data-cat="topsellers"><span class="item-emoji">🍔</span><div class="item-name">Crispy Chicken Burger</div><div class="item-desc">Crispy schnitzel chicken, burger bun, cheddar, iceberg, tomato, burger mayo.</div><div class="item-footer"><div class="item-price">540 L</div><div class="item-tag">⭐ Top</div></div></div>
+      <div class="menu-item visible" data-cat="topsellers"><span class="item-emoji">🥣</span><div class="item-name">Leonidas Bowl (Patate)</div><div class="item-desc">Fries, 2 marinated chicken skewers with sweet chili &amp; tarragon, Greek salad, tzatziki, pita.</div><div class="item-footer"><div class="item-price">650 L</div><div class="item-tag">⭐ Top</div></div></div>
+      <div class="menu-item visible" data-cat="topsellers"><span class="item-emoji">🥣</span><div class="item-name">Leonidas Bowl (Oriz)</div><div class="item-desc">Greek-style vegetable rice, 2 marinated chicken skewers with sweet chili &amp; tarragon, Greek salad, tzatziki, pita.</div><div class="item-footer"><div class="item-price">650 L</div><div class="item-tag">⭐ Top</div></div></div>
+
+      <!-- NEW PRODUCTS -->
+      <div class="menu-item visible" data-cat="wraps"><span class="item-emoji">🌯</span><div class="item-name">Schnitzel Wrap 🆕</div><div class="item-desc">Tortilla, crispy fried chicken, tomato, salad, spicy garlic mayo, cheddar cheese.</div><div class="item-footer"><div class="item-price">450 L</div><div class="item-tag">New</div></div></div>
+      <div class="menu-item visible" data-cat="sides"><span class="item-emoji">🍗</span><div class="item-name">BBQ Chicken Wings (6) 🆕</div><div class="item-desc">Chicken wings marinated in BBQ sauce.</div><div class="item-footer"><div class="item-price">350 L</div><div class="item-tag">New</div></div></div>
+      <div class="menu-item visible" data-cat="sides"><span class="item-emoji">🍗</span><div class="item-name">BBQ Chicken Wings (8) 🆕</div><div class="item-desc">Chicken wings marinated in BBQ sauce.</div><div class="item-footer"><div class="item-price">450 L</div><div class="item-tag">New</div></div></div>
+      <div class="menu-item visible" data-cat="sides"><span class="item-emoji">🍗</span><div class="item-name">BBQ Chicken Wings (10) 🆕</div><div class="item-desc">Chicken wings marinated in BBQ sauce.</div><div class="item-footer"><div class="item-price">550 L</div><div class="item-tag">New</div></div></div>
+
+      <!-- SIGNATURE PITAS & BURGERS -->
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Chicken Breast Pita</div><div class="item-desc">Pita, spicy garlic mayo, roasted peppers, Roman lettuce, marinated chicken skewer, white feta.</div><div class="item-footer"><div class="item-price">350 L</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Schnitzel Pita</div><div class="item-desc">Pita, crispy chicken schnitzel, garlic mayo &amp; spicy sauce, salad, tomato.</div><div class="item-footer"><div class="item-price">340 L</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Truffle Chicken Gyros</div><div class="item-desc">Pita, chicken gyros, truffle mayo, red onion, parmesan, tomato, salad and toasted bread.</div><div class="item-footer"><div class="item-price">350 L</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Halloumi Pita</div><div class="item-desc">Pita, halloumi cheese, salad, tomato, tzatziki, olive paste, roasted peppers, paprika.</div><div class="item-footer"><div class="item-price">390 L</div><div class="item-tag">Veggie</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🍔</span><div class="item-name">Crispy Chicken Burger</div><div class="item-desc">Crispy chicken schnitzel, burger bun, cheddar sauce, salad, tomato and burger mayo.</div><div class="item-footer"><div class="item-price">540 L</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🍔</span><div class="item-name">OPA Smash Burger</div><div class="item-desc">Beef smash patty, salad, burger bun, cheddar sauce, pickles, burger mayo.</div><div class="item-footer"><div class="item-price">620 L</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🍔</span><div class="item-name">Double OPA Smash Burger</div><div class="item-desc">2 beef patties, salad, burger bun, cheddar sauce, pickles, burger mayo.</div><div class="item-footer"><div class="item-price">850 L</div><div class="item-tag">Double</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Chicken Skepasti</div><div class="item-desc">Pita, marinated chicken fillet, pancetta mayo, honey mustard, tomato, paprika, fries, cabbage &amp; salad.</div><div class="item-footer"><div class="item-price">590 L</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Minced Beef Skepasti</div><div class="item-desc">Pita, beef kofta, tomato, red onion, burger mayo, BBQ sauce, paprika, fries &amp; homemade pickled cucumber.</div><div class="item-footer"><div class="item-price">790 L</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Aphrodite</div><div class="item-desc">Pita, marinated chicken skewer, salad, tomato, OPA Mayo, paprika.</div><div class="item-footer"><div class="item-price">320 L</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Chicken Gyros</div><div class="item-desc">Pita, chicken gyros, OPA mayo, fries, salad, tomato, paprika.</div><div class="item-footer"><div class="item-price">300 L</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Chicken Gyros Big</div><div class="item-desc">Large pita, chicken gyros, OPA mayo, fries, salad, tomato, paprika.</div><div class="item-footer"><div class="item-price">420 L</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Kebab Pita</div><div class="item-desc">Pita, beef kebab, tzatziki, BBQ sauce, tomato, red onion, paprika.</div><div class="item-footer"><div class="item-price">350 L</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Falafel Pita</div><div class="item-desc">Pita, yogurt or hummus sauce, falafel, roasted peppers, salad, tomato, red onion, paprika.</div><div class="item-footer"><div class="item-price">300 L</div><div class="item-tag">Veggie</div></div></div>
+      <div class="menu-item visible" data-cat="pitas"><span class="item-emoji">🥙</span><div class="item-name">Gjiro e Hapur Pule</div><div class="item-desc">Pita, full chicken gyros portion, fries, tomato, salad, paprika.</div><div class="item-footer"><div class="item-price">600 L</div></div></div>
+
+      <!-- WRAPS -->
+      <div class="menu-item visible" data-cat="wraps"><span class="item-emoji">🌯</span><div class="item-name">Hermes</div><div class="item-desc">Tortilla, marinated chicken skewer, OPA mayo, tomato, salad, red onion.</div><div class="item-footer"><div class="item-price">450 L</div></div></div>
+      <div class="menu-item visible" data-cat="wraps"><span class="item-emoji">🌯</span><div class="item-name">Gaia</div><div class="item-desc">Tortilla, chicken gyros, OPA mayo, tomato, red onion, salad.</div><div class="item-footer"><div class="item-price">400 L</div></div></div>
+
+      <!-- SPARTAN BOWLS -->
+      <div class="menu-item visible" data-cat="bowls"><span class="item-emoji">🥣</span><div class="item-name">Leonidas Bowl (Oriz)</div><div class="item-desc">Greek-style veggie rice, 2 chicken skewers with sweet chili &amp; tarragon, Greek salad, tzatziki, pita.</div><div class="item-footer"><div class="item-price">650 L</div></div></div>
+      <div class="menu-item visible" data-cat="bowls"><span class="item-emoji">🥣</span><div class="item-name">Leonidas Bowl (Patate)</div><div class="item-desc">Fries, 2 chicken skewers with sweet chili &amp; tarragon, Greek salad, tzatziki, pita.</div><div class="item-footer"><div class="item-price">650 L</div></div></div>
+      <div class="menu-item visible" data-cat="bowls"><span class="item-emoji">🥣</span><div class="item-name">Kebab Bowl (Oriz)</div><div class="item-desc">Greek-style veggie rice, homemade kofta, Greek salad, tzatziki, pita.</div><div class="item-footer"><div class="item-price">690 L</div></div></div>
+      <div class="menu-item visible" data-cat="bowls"><span class="item-emoji">🥣</span><div class="item-name">Kebab Bowl (Patate)</div><div class="item-desc">Fries, homemade kofta, Greek salad, tzatziki, pita.</div><div class="item-footer"><div class="item-price">690 L</div></div></div>
+      <div class="menu-item visible" data-cat="bowls"><span class="item-emoji">🥣</span><div class="item-name">Chicken Gyros Bowl</div><div class="item-desc">Rice or fries, chicken gyros, OPA mayo, Greek salad, pita.</div><div class="item-footer"><div class="item-price">600 L</div></div></div>
+      <div class="menu-item visible" data-cat="bowls"><span class="item-emoji">🥣</span><div class="item-name">Schnitzel Bowl</div><div class="item-desc">Rice or fries, crispy chicken schnitzel, garlic &amp; spicy mayo, Greek salad, pita.</div><div class="item-footer"><div class="item-price">630 L</div></div></div>
+
+      <!-- SALADS -->
+      <div class="menu-item visible" data-cat="salads"><span class="item-emoji">🥗</span><div class="item-name">Greek Salad</div><div class="item-desc">Tomato, cucumber, green peppers, onion, Kalamata olives, capers, feta, oregano, organic olive oil.</div><div class="item-footer"><div class="item-price">350 L</div><div class="item-tag">Veggie</div></div></div>
+      <div class="menu-item visible" data-cat="salads"><span class="item-emoji">🥑</span><div class="item-name">Avocado Salad</div><div class="item-desc">Baby romaine, avocado, honey mustard dressing, dill, crispy bread.</div><div class="item-footer"><div class="item-price">490 L</div></div></div>
+      <div class="menu-item visible" data-cat="salads"><span class="item-emoji">🥗</span><div class="item-name">Cretan Salad</div><div class="item-desc">Tomato, feta, capers, garlic with olive oil, oregano, crispy bread.</div><div class="item-footer"><div class="item-price">420 L</div></div></div>
+      <div class="menu-item visible" data-cat="salads"><span class="item-emoji">🥗</span><div class="item-name">Greek Caesar Salad</div><div class="item-desc">Baby romaine, parmesan, crispy bread, tomato and authentic OPA Caesar dressing.</div><div class="item-footer"><div class="item-price">300 L</div></div></div>
+
+      <!-- SIDES -->
+      <div class="menu-item visible" data-cat="sides"><span class="item-emoji">🥒</span><div class="item-name">Fried Zucchini Balls</div><div class="item-desc">Zucchini kofta served with tzatziki sauce.</div><div class="item-footer"><div class="item-price">250 L</div><div class="item-tag">Veggie</div></div></div>
+      <div class="menu-item visible" data-cat="sides"><span class="item-emoji">🍟</span><div class="item-name">The Greek Fries</div><div class="item-desc">Fries topped with feta cheese and oregano.</div><div class="item-footer"><div class="item-price">350 L</div></div></div>
+      <div class="menu-item visible" data-cat="sides"><span class="item-emoji">🍟</span><div class="item-name">French Fries</div><div class="item-desc">Classic fries with salt and oregano.</div><div class="item-footer"><div class="item-price">250 L</div></div></div>
+      <div class="menu-item visible" data-cat="sides"><span class="item-emoji">🧀</span><div class="item-name">Halloumi Chips</div><div class="item-desc">Halloumi cheese served with yogurt sauce.</div><div class="item-footer"><div class="item-price">490 L</div></div></div>
+      <div class="menu-item visible" data-cat="sides"><span class="item-emoji">🍟</span><div class="item-name">Cheddar Fries</div><div class="item-desc">Fries drizzled with cheddar sauce.</div><div class="item-footer"><div class="item-price">350 L</div></div></div>
+      <div class="menu-item visible" data-cat="sides"><span class="item-emoji">🫙</span><div class="item-name">Tzatziki</div><div class="item-desc">Greek yogurt, cucumber, garlic, dill, olive oil.</div><div class="item-footer"><div class="item-price">250 L</div></div></div>
+
+      <!-- KIDS -->
+      <div class="menu-item visible" data-cat="kids"><span class="item-emoji">🍔</span><div class="item-name">OPA Junior Burger</div><div class="item-desc">Beef patty, burger bun, cheddar sauce, ketchup, fries + Coca-Cola 0.25L.</div><div class="item-footer"><div class="item-price">550 L</div><div class="item-tag">Kids</div></div></div>
+      <div class="menu-item visible" data-cat="kids"><span class="item-emoji">🥙</span><div class="item-name">Junior Chicken Gyros</div><div class="item-desc">Pita, chicken gyros, cheddar sauce, fries + Coca-Cola 0.25L.</div><div class="item-footer"><div class="item-price">390 L</div><div class="item-tag">Kids</div></div></div>
+      <div class="menu-item visible" data-cat="kids"><span class="item-emoji">🌯</span><div class="item-name">Junior Chicken Tortilla</div><div class="item-desc">Tortilla, chicken gyros, cheddar cheese, fries + Coca-Cola 0.25L.</div><div class="item-footer"><div class="item-price">450 L</div><div class="item-tag">Kids</div></div></div>
+
+      <!-- COMBOS -->
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Chicken Skepasti Combo</div><div class="item-desc">Chicken Skepasti + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">690 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Minced Beef Skepasti Combo</div><div class="item-desc">Minced Beef Skepasti + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">890 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Chicken Gyros Pita Combo</div><div class="item-desc">Chicken Gyros + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">530 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Chicken Gyros Big Combo</div><div class="item-desc">Chicken Gyros Big + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">660 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Halloumi Pita Combo</div><div class="item-desc">Halloumi Pita + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">630 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Crispy Chicken Burger Combo</div><div class="item-desc">Crispy Chicken Burger + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">750 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">OPA Smash Burger Combo</div><div class="item-desc">OPA Smash Burger + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">850 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Double OPA Smash Combo</div><div class="item-desc">Double OPA Smash Burger + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">990 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Hermes Combo</div><div class="item-desc">Hermes Wrap + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">650 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Gaia Combo</div><div class="item-desc">Gaia Wrap + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">600 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Schnitzel Wrap Combo</div><div class="item-desc">Schnitzel Wrap + fries + drink + ketchup + mustard.</div><div class="item-footer"><div class="item-price">650 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Truffle Chicken Gyros Combo</div><div class="item-desc">Truffle Chicken Gyros + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">560 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Falafel Pita Combo</div><div class="item-desc">Falafel Pita + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">500 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Aphrodite Pita Combo</div><div class="item-desc">Aphrodite Pita + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">560 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Schnitzel Pita Combo</div><div class="item-desc">Schnitzel Pita + fries + Coca-Cola + ketchup + mustard.</div><div class="item-footer"><div class="item-price">530 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Kebab Pita Combo</div><div class="item-desc">Kebab Pita + fries + mustard + ketchup.</div><div class="item-footer"><div class="item-price">600 L</div><div class="item-tag">Combo</div></div></div>
+      <div class="menu-item visible" data-cat="combos"><span class="item-emoji">🎁</span><div class="item-name">Chicken Doner Combo</div><div class="item-desc">Chicken Doner + fries + drink + ketchup + mustard.</div><div class="item-footer"><div class="item-price">570 L</div><div class="item-tag">Combo</div></div></div>
+
+      <!-- SWEETS -->
+      <div class="menu-item visible" data-cat="sweets"><span class="item-emoji">🍯</span><div class="item-name">Traditional Baklava</div><div class="item-desc">Traditional baklava (1 piece).</div><div class="item-footer"><div class="item-price">160 L</div><div class="item-tag">Sweet</div></div></div>
+
+      <!-- DRINKS -->
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">💧</span><div class="item-name">Ujë Selita Natural 0.5L</div><div class="item-desc">Still water.</div><div class="item-footer"><div class="item-price">100 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">💧</span><div class="item-name">Ujë Selita me Gaz 0.5L</div><div class="item-desc">Sparkling water.</div><div class="item-footer"><div class="item-price">100 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">🥤</span><div class="item-name">Coca-Cola 0.33L</div><div class="item-desc">Classic Coca-Cola.</div><div class="item-footer"><div class="item-price">180 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">🥤</span><div class="item-name">Coca-Cola Zero 0.33L</div><div class="item-desc">Zero sugar.</div><div class="item-footer"><div class="item-price">180 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">🥤</span><div class="item-name">Fanta Portokall 0.33L</div><div class="item-desc">Orange Fanta.</div><div class="item-footer"><div class="item-price">180 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">🥤</span><div class="item-name">Sprite 0.33L</div><div class="item-desc">Classic Sprite.</div><div class="item-footer"><div class="item-price">180 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">🥤</span><div class="item-name">Orange Soda 0.33L</div><div class="item-desc">Orange soda.</div><div class="item-footer"><div class="item-price">180 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">🍵</span><div class="item-name">Lipton Ice Tea</div><div class="item-desc">Lipton iced tea.</div><div class="item-footer"><div class="item-price">180 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">🍋</span><div class="item-name">Lemon Soda</div><div class="item-desc">Refreshing lemon soda.</div><div class="item-footer"><div class="item-price">180 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">⚡</span><div class="item-name">Red Bull</div><div class="item-desc">Energy drink.</div><div class="item-footer"><div class="item-price">400 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">🍺</span><div class="item-name">Heineken 0.33L</div><div class="item-desc">Premium lager beer.</div><div class="item-footer"><div class="item-price">350 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">🍺</span><div class="item-name">Korça 0.33L</div><div class="item-desc">Albanian craft lager.</div><div class="item-footer"><div class="item-price">350 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">🍺</span><div class="item-name">Paulaner Weiss 0.55L</div><div class="item-desc">German wheat beer.</div><div class="item-footer"><div class="item-price">450 L</div></div></div>
+      <div class="menu-item visible" data-cat="drinks"><span class="item-emoji">🍺</span><div class="item-name">Heineken Pa Alkol</div><div class="item-desc">Non-alcoholic Heineken.</div><div class="item-footer"><div class="item-price">350 L</div></div></div>
+
+    </div>
+    <div style="text-align:center;margin-top:3rem;">
+      <a href="https://opagreekstreet.tryordering.com/store/opa_greek_street___shkoder" target="_blank" class="btn-primary" data-i18n="menu.cta">See Full Menu &amp; Order →</a>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="container">
+    <div class="section-label" data-i18n="why.label">Why OPA?</div>
+    <h2 data-i18n-html="why.h2">The Greek Way<br>of <em>Doing Things</em></h2>
+    <div class="pillars">
+      <div class="pillar"><div class="pillar-num">01</div><div class="pillar-icon">🫒</div><div class="pillar-title" data-i18n="why.p1t">Real Ingredients</div><p data-i18n="why.p1d">No shortcuts. Proper Greek herbs, fresh vegetables and quality meat — every single day.</p></div>
+      <div class="pillar"><div class="pillar-num">02</div><div class="pillar-icon">⚡</div><div class="pillar-title" data-i18n="why.p2t">Street Speed</div><p data-i18n="why.p2d">Fast food done right. You shouldn't have to wait long for food that tastes this good.</p></div>
+      <div class="pillar"><div class="pillar-num">03</div><div class="pillar-icon">🛵</div><div class="pillar-title" data-i18n="why.p3t">Delivery &amp; Takeaway</div><p data-i18n="why.p3d">Order online, pick it up fresh or have it delivered hot to your door. Your call.</p></div>
+      <div class="pillar"><div class="pillar-num">04</div><div class="pillar-icon">🎉</div><div class="pillar-title" data-i18n="why.p4t">The OPA! Spirit</div><p data-i18n="why.p4d">"OPA!" is the Greek shout of joy. That energy is in every wrap we serve.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="container">
+    <div>
+      <h2 data-i18n-html="order.h2">Ready to<br><em>Order?</em></h2>
+      <p data-i18n="order.p">Place your order online for pickup or delivery in Shkodër.</p>
+    </div>
+    <div class="order-buttons">
+      <a href="https://opagreekstreet.tryordering.com/store/opa_greek_street___shkoder" target="_blank" class="order-btn"><span data-i18n="order.btn1">Order Now</span> <span>→</span></a>
+      <a href="https://www.instagram.com/opa.shkoder/" target="_blank" class="order-btn"><span data-i18n="order.btn2">Follow on Instagram</span> <span>↗</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="section-label" data-i18n="contact.label">Find Us</div>
+        <h2 data-i18n-html="contact.h2">Come Say<br><em>OPA!</em></h2>
+        <div class="contact-info" style="margin-top:2.5rem;">
+          <div class="info-row">
+            <div class="info-icon">📍</div>
+            <div><div class="info-label" data-i18n="contact.locLabel">Location</div><div class="info-val">Rruga Kolë Idromeno<br>Shkodër 4001, Albania</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">📞</div>
+            <div><div class="info-label" data-i18n="contact.phoneLabel">Phone</div><div class="info-val"><a href="tel:+355697015577">+355 69 701 5577</a></div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">🕐</div>
+            <div><div class="info-label" data-i18n="contact.hoursLabel">Hours</div><div class="info-val" data-i18n="contact.hoursVal">Open daily - From 8:00 AM to 12:00 AM</div></div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">🛵</div>
+            <div><div class="info-label" data-i18n="contact.delivLabel">Delivery</div><div class="info-val" data-i18n="contact.delivVal">Available via our online ordering platform</div></div>
+          </div>
+          <div class="map-embed">
+            <iframe width="100%" height="220" style="border:0;display:block;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5923.671811411693!2d19.51228447539695!3d42.06813655349573!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x134e012676b8dbed%3A0x2f906226d8e1c8a2!2sOPA%20Shkod%C3%ABr!5e0!3m2!1sen!2sus!4v1772916769802!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="contact-social">
+        <h3 data-i18n="contact.socialLabel">Follow &amp; Connect</h3>
+        <div class="social-links">
+          <a href="https://www.instagram.com/opa.shkoder/" target="_blank" class="social-link"><span>📸</span> @opa.shkoder</a>
+          <a href="tel:+355697015577" class="social-link"><span>📞</span> +355 69 701 5577</a>
+          <a href="https://opagreekstreet.tryordering.com/store/opa_greek_street___shkoder" target="_blank" class="social-link"><span>🛒</span> <span data-i18n="contact.orderLink">Order Online</span></a>
+          <a href="https://opa-shkodr.menu-world.com/" target="_blank" class="social-link"><span>📋</span> <span data-i18n="contact.menuLink">Full Menu</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img src="opa-logo.png" alt="OPA Greek Street" style="height:50px;width:auto;" />
+  <div class="footer-text" data-i18n="footer.copy">© 2025 OPA Greek Street Shkodër — All rights reserved</div>
+</footer>
+
+<script>
+const translations = {
+  en: {
+    "nav.about":"About","nav.menu":"Menu","nav.contact":"Contact","nav.order":"Order Now",
+    "hero.tag":"Greek Street Food · Shkodër, Albania","hero.h1":"Taste<br><em>Greece.</em><br>Right Here.","hero.sub":"Authentic Greek street food — gyros, souvlaki, fresh pitas — made from recipes that go back generations. Fast, bold, and unapologetically Greek.","hero.cta1":"Order Online →","hero.cta2":"View Menu","hero.label":"Greek Street Food","hero.badge":"Open<br>Now<br>🔥<br>Shkodër",
+    "about.label":"Our Story","about.h2":"Where the Streets <em>of Greece</em> Meet Shkodër","about.card1":"Fresh Daily","about.card2v":"Hot","about.card2l":"Always","about.card3v":"Made","about.card3l":"With Love","about.card4v":"Fast","about.card4l":"Delivery","about.p1":"OPA Greek Street was born from a love of Greek culture and street food — the kind you find at a busy corner in Athens or Thessaloniki, wrapped in warm pita and bursting with flavour.","about.p2":"Every gyro is slow-roasted, every tzatziki whipped fresh, and every pita baked to order. We bring the spirit of the Greek street corner straight to Shkodër.","about.p3":"We believe fast food can be real food — so we never cut corners on ingredients, only on waiting time.","about.cta":"Explore the Menu",
+    "menu.label":"What We Serve","menu.h2":"Our <em>Menu</em>","menu.sub":"Everything made fresh. Order online for pickup or delivery in Shkodër.","menu.catAll":"All","menu.catTop":"⭐ Top Sellers","menu.catPitas":"Pitas & Burgers","menu.catWraps":"Wraps","menu.catBowls":"Spartan Bowls","menu.catCombos":"Combos","menu.catSalads":"Salads","menu.catSides":"Sides & Fries","menu.catKids":"Kids","menu.catDrinks":"Drinks","menu.catSweets":"Sweets","menu.cta":"See Full Menu & Order →",
+    "items.g1.name":"Chicken Gyro","items.g1.desc":"Slow-roasted chicken, tomatoes, onions, tzatziki and fries in warm pita.",
+    "items.g2.name":"Beef Gyro","items.g2.desc":"Seasoned beef strips, fresh tomatoes, red onion, tzatziki in grilled pita.",
+    "items.g3.name":"Mixed Gyro","items.g3.desc":"Half chicken, half beef. The best of both worlds with our signature tzatziki.",
+    "items.g4.name":"Souvlaki Wrap","items.g4.desc":"Skewered chicken marinated in lemon, oregano and garlic, served in pita with tzatziki and salad.",
+    "items.p1.name":"Souvlaki Plate","items.p1.desc":"Two skewers of grilled chicken with Greek fries, fresh salad, pita and tzatziki.",
+    "items.p2.name":"Greek Salad","items.p2.desc":"Cucumber, ripe tomatoes, Kalamata olives, red onion and a slab of feta. Dressed with olive oil and oregano.",
+    "items.p3.name":"OPA Platter","items.p3.desc":"Gyro meat, souvlaki, Greek salad, hummus, tzatziki and warm pita. Perfect for sharing.",
+    "items.s1.name":"OPA Fries","items.s1.desc":"Thick-cut fries seasoned with oregano and sea salt. Crispy outside, fluffy inside.",
+    "items.s2.name":"Tzatziki","items.s2.desc":"Thick Greek yogurt with cucumber, garlic, dill and olive oil. Served with warm pita.",
+    "items.s3.name":"Spanakopita","items.s3.desc":"Flaky phyllo pastry stuffed with fresh spinach and creamy feta. Baked golden.",
+    "items.s4.name":"Hummus","items.s4.desc":"Smooth blended chickpeas with tahini, lemon and olive oil. Served with pita.",
+    "items.d1.name":"Baklava","items.d1.desc":"Crispy phyllo layers with walnuts and pistachios, soaked in honey syrup. A Greek classic.",
+    "items.d2.name":"Loukoumades","items.d2.desc":"Light Greek honey puffs fried golden and drizzled with honey and cinnamon.",
+    "items.dr1.name":"Lemonade","items.dr1.desc":"Fresh-squeezed Greek-style lemonade with a hint of mint.",
+    "items.dr2.name":"Greek Coffee","items.dr2.desc":"Traditional boiled Greek coffee served in a small cup, strong and aromatic.",
+    "items.dr3.name":"Soft Drinks","items.dr3.desc":"Coca-Cola, Fanta, Sprite or water. Ice cold.",
+    "tags.bestseller":"Bestseller","tags.popular":"Popular","tags.fresh":"Fresh","tags.plate":"Plate","tags.veggie":"Veggie","tags.sharing":"Sharing","tags.sweet":"Sweet",
+    "why.label":"Why OPA?","why.h2":"The Greek Way<br>of <em>Doing Things</em>","why.p1t":"Real Ingredients","why.p1d":"No shortcuts. Proper Greek herbs, fresh vegetables and quality meat — every single day.","why.p2t":"Street Speed","why.p2d":"Fast food done right. You shouldn't have to wait long for food that tastes this good.","why.p3t":"Delivery & Takeaway","why.p3d":"Order online, pick it up fresh or have it delivered hot to your door. Your call.","why.p4t":"The OPA! Spirit","why.p4d":'"OPA!" is the Greek shout of joy. That energy is in every wrap we serve.',
+    "order.h2":"Ready to<br><em>Order?</em>","order.p":"Place your order online for pickup or delivery in Shkodër.","order.btn1":"Order Now","order.btn2":"Follow on Instagram",
+    "contact.label":"Find Us","contact.h2":"Come Say<br><em>OPA!</em>","contact.locLabel":"Location","contact.phoneLabel":"Phone","contact.hoursLabel":"Hours","contact.hoursVal":"Open daily — check Instagram for current times","contact.delivLabel":"Delivery","contact.delivVal":"Available via our online ordering platform","contact.socialLabel":"Follow & Connect","contact.orderLink":"Order Online","contact.menuLink":"Full Menu",
+    "footer.copy":"© 2025 OPA Greek Street Shkodër — All rights reserved"
+  },
+  sq: {
+    "nav.about":"Rreth Nesh","nav.menu":"Menu","nav.contact":"Kontakt","nav.order":"Porosit Tani",
+    "hero.tag":"Ushqim Rruge Grek · Shkodër, Shqipëri","hero.h1":"Shijo<br><em>Greqinë.</em><br>Këtu.","hero.sub":"Ushqim autentik grek — gyros, souvlaki, pita të freskëta — nga receta të vjetra brezash. I shpejtë, i guximshëm dhe krejtësisht grek.","hero.cta1":"Porosit Online →","hero.cta2":"Shiko Menunë","hero.label":"Ushqim Rruge Grek","hero.badge":"Hapur<br>Tani<br>🔥<br>Shkodër",
+    "about.label":"Historia Jonë","about.h2":"Ku Rrugët <em>e Greqisë</em> Takohen me Shkodërn","about.card1":"Çdo Ditë Fre.","about.card2v":"Nxehtë","about.card2l":"Gjithmonë","about.card3v":"Bërë","about.card3l":"Me Dashuri","about.card4v":"I Shpejtë","about.card4l":"Dërgim","about.p1":"OPA Greek Street lindi nga dashuria për kulturën greke dhe ushqimin e rrugës — lloji që gjen në një cep të zhurmshëm të Athinës ose Selanikut, wraps me pita të ngrohtë dhe plot shije.","about.p2":"Çdo gyro është pjekur ngadalë, çdo tzatziki bëhet i freskët, dhe çdo pita gatuhet me porosi. Çojmë frymën e rrugës greke direkt në Shkodër.","about.p3":"Besojmë se ushqimi i shpejtë mund të jetë ushqim i vërtetë — prandaj nuk kursejmë kurrë te përbërësit, vetëm te koha e pritjes.","about.cta":"Shiko Menunë",
+    "menu.label":"Çfarë Shërbejmë","menu.h2":"Menuja <em>Jonë</em>","menu.sub":"Gjithçka bëhet fre. Porosit online për t'u marrë ose me dërgim në Shkodër.","menu.catAll":"Të Gjitha","menu.catTop":"⭐ Më të Shitura","menu.catPitas":"Pita & Burgerë","menu.catWraps":"Mbëshjellje","menu.catBowls":"Spartan Bowls","menu.catCombos":"Kombos","menu.catSalads":"Sallata","menu.catSides":"Shoqëruese","menu.catKids":"Fëmijë","menu.catDrinks":"Pije","menu.catSweets":"Ëmbëlsira","menu.cta":"Shiko Menunë & Porosit →",
+    "items.g1.name":"Gyro me Pulë","items.g1.desc":"Pulë e pjekur ngadalë, domate, qepë, tzatziki dhe patate në pita të ngrohtë.",
+    "items.g2.name":"Gyro me Viçi","items.g2.desc":"Feta viçi të erëzuara, domate të freskëta, qepë të kuqe, tzatziki në pita të griluara.",
+    "items.g3.name":"Gyro i Përzier","items.g3.desc":"Gjysma pulë, gjysma viçi. Më i miri nga të dyja me tzatziki-n tonë.",
+    "items.g4.name":"Wrap Souvlaki","items.g4.desc":"Pulë e marinuar me limon, rigon dhe hudhër, shërbyer në pita me tzatziki dhe sallate.",
+    "items.p1.name":"Pjatë Souvlaki","items.p1.desc":"Dy hell me pulë të grilluar me patate greke, sallate të freskët, pita dhe tzatziki.",
+    "items.p2.name":"Sallatë Greke","items.p2.desc":"Tranguj, domate të pjekura, ullinj Kalamata, qepë të kuqe dhe fetë. Me vaj ulliri dhe rigon.",
+    "items.p3.name":"Pjata OPA","items.p3.desc":"Mish gyro, souvlaki, sallatë greke, hummus, tzatziki dhe pita e ngrohtë. Perfekte për ndarje.",
+    "items.s1.name":"Patate OPA","items.s1.desc":"Patate të prera trashë me rigon dhe kripë deti. Krokante jashtë, të buta brenda.",
+    "items.s2.name":"Tzatziki","items.s2.desc":"Kos i trashë grek me tranguj, hudhër, kopër dhe vaj ulliri. Shërbyer me pita.",
+    "items.s3.name":"Spanakopita","items.s3.desc":"Byrek krokant me spinaq të freskët dhe fetë kremoze. I pjekur ar.",
+    "items.s4.name":"Hummus","items.s4.desc":"Qiqra të blenuara me tahini, limon dhe vaj ulliri. Shërbyer me pita.",
+    "items.d1.name":"Baklava","items.d1.desc":"Shtresa krokante me arra dhe pistaqe, të njomura me shurup mjalti. Klasik grek.",
+    "items.d2.name":"Loukoumades","items.d2.desc":"Petulla të lehta greke të skuqura ar dhe të spërkatura me mjaltë dhe kanellë.",
+    "items.dr1.name":"Limonatë","items.dr1.desc":"Limonatë e shtrydhur e freskët në stilin grek me pak nenexhik.",
+    "items.dr2.name":"Kafe Greke","items.dr2.desc":"Kafe tradicionale greke e zier, shërbyer në filxhan të vogël, e fortë dhe aromatike.",
+    "items.dr3.name":"Pije Joalkoolike","items.dr3.desc":"Coca-Cola, Fanta, Sprite ose ujë. Shumë të ftohta.",
+    "tags.bestseller":"Më e Shitur","tags.popular":"Popullar","tags.fresh":"Fre","tags.plate":"Pjatë","tags.veggie":"Vegjetarian","tags.sharing":"Ndarje","tags.sweet":"Ëmbël",
+    "why.label":"Pse OPA?","why.h2":"Mënyra Greke<br>e <em>Të Bërit Gjëra</em>","why.p1t":"Përbërës të Vërtetë","why.p1d":"Pa kompromis. Bimë të duhura greke, perime të freskëta dhe mish cilësor — çdo ditë.","why.p2t":"Shpejtësi Rruge","why.p2d":"Fast food siç duhet. Nuk duhet të prisni gjatë për ushqim kaq të mirë.","why.p3t":"Dërgim & Marrje","why.p3d":"Porosit online, beje pick-up ose dërgohu nxehtë te dera jote. Zgjedhja është e juaja.","why.p4t":"Fryma OPA!","why.p4d":'"OPA!" është britma greke e gëzimit. Ajo energji është në çdo wrap.',
+    "order.h2":"Gati të<br><em>Porosisni?</em>","order.p":"Bëni porosinë tuaj online për marrje ose dërgim në Shkodër.","order.btn1":"Porosit Tani","order.btn2":"Na Ndiq në Instagram",
+    "contact.label":"Na Gjeni","contact.h2":"Ejani të Thoni<br><em>OPA!</em>","contact.locLabel":"Vendndodhja","contact.phoneLabel":"Telefon","contact.hoursLabel":"Orari","contact.hoursVal":"Hapur çdo ditë — kontrolloni Instagram-in për oraret aktuale","contact.delivLabel":"Dërgim","contact.delivVal":"I disponueshëm nëpërmjet platformës sonë të porosive online","contact.socialLabel":"Na Ndiqni & na kontaktoni","contact.orderLink":"Porosit Online","contact.menuLink":"Menu e Plotë",
+    "footer.copy":"© 2026 OPA Greek Street Shkodër — Të gjitha të drejtat e rezervuara"
+  }
+};
+
+function setLang(lang) {
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t[el.getAttribute('data-i18n')];
+    if (v !== undefined) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const v = t[el.getAttribute('data-i18n-html')];
+    if (v !== undefined) el.innerHTML = v;
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+  document.documentElement.lang = lang;
+}
+
+// Category filter
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.getAttribute('data-cat');
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.classList.toggle('visible', cat === 'all' || item.getAttribute('data-cat') === cat);
+    });
+  });
+});
+</script>
+</body>
+</html>
